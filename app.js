@@ -27,9 +27,29 @@ Client.on('message', msg => {
   
 
   if(command === 'help') {
-    msg.channel.send(`\n${Config.prefix}<meme>\n${Config.prefix}add <meme> <text>\n${Config.prefix}remove <meme>`);
+    msg.channel.send('```'+`\n${Config.prefix}list\n${Config.prefix}<meme>\n${Config.prefix}add <meme> <text>\n${Config.prefix}remove <meme>`+'```');
+  }
+  else if (command === 'list') {
+    lookupMemes()
+      .then(memes => {
+        msg.channel.send('```' + memes.map(x => x.meme).join(`\n${Config.prefix}`)+'```');
+      })
+      .catch(err => {
+        msg.channel.send(err);
+      })
   }
   else if(command === 'add' && args.length > 1) {
+    var user = msg.author;
+    var guild = msg.channel.guild;
+    var guildMember = guild.members.find(x => x.id === user.id);
+    var role = guild.roles.find(x => x.name === Config.bot_admin_role);
+    var hasRole = guildMember.roles.has(role.id);
+    
+    if(!hasRole) {
+      msg.reply(`you need **${role.name}**`);
+      return
+    }
+    
     var meme = args[0];
     var content = msg.content;
 
@@ -48,6 +68,18 @@ Client.on('message', msg => {
         msg.channel.send(`:colbert: ${err}`)
       });
   } else if (command === 'remove') {
+    var user = msg.author;
+    var guild = msg.channel.guild;
+    var guildMember = guild.members.find(x => x.id === user.id);
+    var role = guild.roles.find(x => x.name === Config.bot_admin_role);
+    var hasRole = guildMember.roles.has(role.id);
+    
+    
+    if(!hasRole) {
+      msg.reply(`you need **${role.name}**`);
+      return
+    }
+
     var meme = args[0];
     killMeme(meme)
       .then(dead => {
@@ -62,7 +94,6 @@ Client.on('message', msg => {
   } else if (args.length === 0) {
     lookupMeme(command)
       .then(meme => {
-        console.log(meme);
         if(!meme)
           throw new Error("lol what?");
 
@@ -85,12 +116,19 @@ function upsertMeme(meme, text) {
 }
 
 function killMeme(meme) {
-  console.log(meme);
   return new Promise.using(getMongoConnection(connectionUrl), conn => {
     var query = {meme: meme};
     console.log(meme);
 
     return conn.collection('memes').deleteOne(query);
+  })
+}
+
+function lookupMemes() {
+  return new Promise.using(getMongoConnection(connectionUrl), conn => {
+    var query = {};
+
+    return conn.collection('memes').find(query).toArray();
   })
 }
 
