@@ -29,6 +29,9 @@ Client.on('message', msg => {
   if(command === 'help') {
     msg.channel.send('```'+`\n${Config.prefix}list\n${Config.prefix}<meme>\n${Config.prefix}add <meme> <text>\n${Config.prefix}remove <meme>`+'```');
   }
+  else if (command === 'how') {
+    var queryArray = msg.content.split()
+  }
   else if (command === 'list') {
     lookupMemes()
       .then(memes => {
@@ -140,7 +143,7 @@ function lookupMeme(meme) {
   });
 }
 
-var connectionUrl = `mongodb://${Config.database_username}:${Config.database_password}@${Config.database_connection_string}`;
+var connectionUrl = `mongodb://${process.env.database_username}:${process.env.database_password}@${process.env.database_connection_string}`;
 
 /**
  * Opens and closes the connection to a remote mongodb instance.
@@ -151,4 +154,4 @@ function getMongoConnection(url) {
     .disposer(conn => conn.close());
 }
 
-Client.login(Config.token);
+Client.login(process.env.token);
