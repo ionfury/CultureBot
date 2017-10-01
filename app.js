@@ -29,6 +29,26 @@ Client.on('message', msg => {
   if(command === 'help') {
     msg.channel.send('```'+`\n${Config.prefix}list\n${Config.prefix}<meme>\n${Config.prefix}add <meme> <text>\n${Config.prefix}remove <meme>`+'```');
   }
+  if(command === 'time') {
+    var d = new Date();
+    var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+
+    var pst = new Date(utc - (3600000 * 7)).toTimeString().split(' ')[0];
+    var est = new Date(utc - (3600000 * 4)).toTimeString().split(' ')[0];
+    var cet = new Date(utc + (3600000 * 2)).toTimeString().split(' ')[0];
+    var msk = new Date(utc + (3600000 * 3)).toTimeString().split(' ')[0];
+    var aest = new Date(utc + (3600000 * 11)).toTimeString().split(' ')[0];
+    utc = new Date(utc).toTimeString().split(' ')[0];
+
+    var message = `**EVE Time**: ${utc} --`;
+    message += `**PST/Lost Angeles**: ${pst} --`;
+    message += `**EST/New York**: ${est} --`;
+    message += `**CET/Copenhagen**: ${cet} --`;
+    message += `**MSK/Moscow**: ${msk} --`;
+    message += `**AEST/Sydney**: ${aest}`;
+
+    msg.channel.send(message);
+  }
   else if (command === 'how') {
     var queryArray = msg.content.split()
   }
