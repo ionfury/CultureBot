@@ -25,7 +25,6 @@ Client.on('message', msg => {
   var command = args.shift().toLowerCase();
   console.log(`\nCommand received: ${command}, with arguments: ${args.join(', ')}, from user ${msg.author}.`);
   
-
   if(command === 'help') {
     msg.channel.send('```'+`\n${Config.prefix}list\n${Config.prefix}<meme>\n${Config.prefix}add <meme> <text>\n${Config.prefix}remove <meme>`+'```');
   }
@@ -50,12 +49,12 @@ Client.on('message', msg => {
     msg.channel.send(message);
   }
   else if (command === 'how') {
-    var queryArray = msg.content.split()
+    msg.channel.send(`http://i0.kym-cdn.com/entries/icons/original/000/021/158/bleach.jpg`);
   }
   else if (command === 'list') {
     lookupMemes()
       .then(memes => {
-        msg.channel.send('```' + memes.map(x => x.meme).join(`\n${Config.prefix}`)+'```');
+        msg.channel.send('```' + memes.map(x => x.meme).sort().join(`\n${Config.prefix}`)+'```');
       })
       .catch(err => {
         msg.channel.send(err);
