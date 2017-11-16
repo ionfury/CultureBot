@@ -72,8 +72,7 @@ Client.on('message', msg => {
   var command = args.shift().toLowerCase();
   console.log(`\nCommand received: ${command}, with arguments: ${args.join(', ')}, from user ${msg.author}.`);
   
-  DiscordInterface
-    .EvaluateCommand(args, msg)
+  EvaluateCommand(args, msg)
     .then(msg.channel.send)
     .catch(err => {
       msg.channel.send(err.message);
