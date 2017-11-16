@@ -85,6 +85,22 @@ function getSystemIDPromise(system) {
   });
 }
 
+function getItemIDStrictPromise(item) {
+  let options = {
+    route:'search',
+    parameters: `categories=inventorytype&search=${item}`
+  }
+
+  return esiGet(options)
+    .then(JSON.parse)
+    .then(res => {
+      if(!res.inventorytype) 
+        return getItemIDPromise(item);
+      else
+        return res.inventorytype.shift();
+    });
+}
+
 function getItemIDPromise(item) {
   let options = {
     route:'search',
@@ -157,7 +173,7 @@ function getTypeInfoPromise(typeID) {
 
 function getCitadelMarketInfo(system, item) {
   let getSystemID = getSystemIDPromise(system);
-  let getItemID = getItemIDPromise(item);
+  let getItemID = getItemIDStrictPromise(item);
   let getTypeInfo = getItemID.then(getTypeInfoPromise);
   let getSystemName = getSystemID.then(getSystemNameFromIDPromise);
   let getRefreshToken = refreshToken(process.env.refresh_token);
@@ -241,7 +257,7 @@ function getMarketHubInfo(system, item) {
       stationID = 60005686;
       break;
   }
-  let getItemID = getItemIDPromise(item);
+  let getItemID = getItemIDStrictPromise(item);
   let getTypeInfo = getItemID.then(getTypeInfoPromise);
   let getFuzzworkMarketData = getItemID.then(itemID => getFuzzworkMarketDataPromise(stationID, itemID));
 
