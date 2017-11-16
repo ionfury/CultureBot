@@ -5,7 +5,6 @@ let CommandLibrary = require(`./commands.js`);
 
 const SECURITY_ERROR_MESSAGE =  `You do not have the proper security to do this.`;
 
-
 function checkSecurity(msg) {
   var user = msg.author;
   var guild = msg.channel.guild;

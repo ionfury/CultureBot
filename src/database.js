@@ -3,15 +3,6 @@ let Promise = require('bluebird');
 
 Promise.promisifyAll(MongoClient);
 
-let process = {
-  'env':{
-    'database_connection_string':'ds155684.mlab.com:55684/culturebot',
-    'database_password':'zh^q<5Q=ywzCQM4',
-    'database_username':'memer',
-    'token':'MzYzMDI5NTQ1NTA4NTM2MzIy.DK7RWg.I9Rq0G_zSoyTxtwlbsCiKuilHo0'
-  }
-}
-
 const connectionUrl = `mongodb://${process.env.database_username}:${process.env.database_password}@${process.env.database_connection_string}`;
 
 /**
