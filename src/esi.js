@@ -97,7 +97,7 @@ function getItemIDPromise(item) {
       if(!res.inventorytype) 
         throw new Error('Inventorytype not found!');
       else
-        return res.inventorytype.sort().shift();
+        return res.inventorytype.shift();
     });
 }
 
