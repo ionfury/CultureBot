@@ -97,7 +97,7 @@ function getItemIDPromise(item) {
       if(!res.inventorytype) 
         throw new Error('Inventorytype not found!');
       else
-        return res.inventorytype.shift();
+        return res.inventorytype.sort().shift();
     });
 }
 
@@ -172,10 +172,9 @@ function getCitadelMarketInfo(system, item) {
   });
 
   let getStructureMarkets = Promise.join(getRefreshToken, getSystemStructures, getSystemName, (token, structures, systemName) => {
-    if(structures.structure.length == 0)
+    if(!structures.structure == 0)
       throw new Error(`No structures found in **${systemName}**`);
     return Promise.map(structures.structure, structure => getStructureMarket(token, structure))
-
   });
 
   return Promise.join(getItemID, getTypeInfo, getSystemName, getSystemStructures, getStructureMarkets, (itemID, typeInfo, systemName, systemStructures, structureMarkets) => {
