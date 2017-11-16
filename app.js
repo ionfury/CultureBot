@@ -73,7 +73,7 @@ Client.on('message', msg => {
   console.log(`\nCommand received: ${command}, with arguments: ${args.join(', ')}, from user ${msg.author}.`);
   
   EvaluateCommand(args, msg)
-    .then(msg.channel.send)
+    .then(res => msg.channel.send(res))
     .catch(err => {
       msg.channel.send(err.message);
       console.log(err);
