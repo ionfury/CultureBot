@@ -48,6 +48,7 @@ module.exports =
           if(args.length < 2)
             throw new Error('Gimme a system and an item, man.');
           response = CommandLibrary.Price(args[0], args[1]);
+          break;
         default:
           response = CommandLibrary.GetMeme(command);
           break;

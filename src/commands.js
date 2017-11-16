@@ -62,7 +62,9 @@ module.exports = {
 
   RemoveMeme: (meme) => {
     return Database.RemoveMeme(meme)
-      .then(removed => `RIP **${meme}**!`);
+      .then(removed => {
+        console.log(removed)
+        return `RIP **${meme}**!`});
   },
 
   Default: () => {
