@@ -49,7 +49,7 @@ module.exports =
             throw new Error('Gimme a system and an item, man.');
           response = CommandLibrary.Price(args[0], args[1]);
         default:
-          response = CommandLibrary.Default();
+          response = CommandLibrary.GetMeme(command);
           break;
       }
       res(response);

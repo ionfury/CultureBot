@@ -47,7 +47,12 @@ module.exports = {
 
   GetMeme: (meme) => {
     return Database.LookupMeme(meme)
-      .then(returned => returned);
+      .then(returned => {
+        if(!returned)
+          return Default();
+        else
+          return returned;
+      });
   },
 
   AddMeme: (meme, content) => {
