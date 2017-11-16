@@ -35,6 +35,8 @@ module.exports =
           response = CommandLibrary.List();
           break;
         case 'add':
+          if(args.length < 1)
+            throw new Error('Gimme the meme, man.');
           var meme = args[0];
           var content = msg.content.slice(Config.prefix.length).slice('add '.length).slice(meme.length+1);
           response = checkSecurity(msg) ? CommandLibrary.Add(meme, content) : SECURITY_ERROR_MESSAGE;
@@ -42,6 +44,10 @@ module.exports =
         case 'remove':
           response = checkSecurity(msg) ? CommandLibrary.Remove() : SECURITY_ERROR_MESSAGE;
           break;
+        case 'price':
+          if(args.length < 2)
+            throw new Error('Gimme a system and an item, man.');
+          response = CommandLibrary.Price(args[0], args[1]);
         default:
           response = CommandLibrary.Default();
           break;

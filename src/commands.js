@@ -6,12 +6,12 @@ let Config = require(`../config.json`);
 module.exports = {
   Help: () => {
     return '```'
-      +`\n${Config.prefix}list
-      \n${Config.prefix}<meme>
-      \n${Config.prefix}add <meme> <text>
-      \n${Config.prefix}remove <meme>
-      \n${Config.prefix}time
-      \n${Config.prefix}price <system> <item>`+'```'
+      +`${Config.prefix}list
+      ${Config.prefix}<meme>
+      ${Config.prefix}add <meme> <text>
+      ${Config.prefix}remove <meme>
+      ${Config.prefix}time
+      ${Config.prefix}price <system> <item>`+'```'
   },
 
   Time: () => {
