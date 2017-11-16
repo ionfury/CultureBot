@@ -6,12 +6,14 @@ let CommandLibrary = require(`./commands.js`);
 const SECURITY_ERROR_MESSAGE =  `You do not have the proper security to do this.`;
 
 function checkSecurity(msg) {
+  console.log("a")
   var user = msg.author;
   var guild = msg.channel.guild;
   var guildMember = guild.members.find(x => x.id === user.id);
   var role = guild.roles.find(x => x.name === Config.bot_admin_role);
   var hasRole = guildMember.roles.has(role.id);
   
+  console.log("b")
   return hasRole;  
 }
 
