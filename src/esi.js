@@ -88,7 +88,7 @@ function getSystemIDPromise(system) {
 function getItemIDStrictPromise(item) {
   let options = {
     route:'search',
-    parameters: `categories=inventorytype&search=${item}`
+    parameters: `categories=inventorytype&search=${item}&strict=true`
   }
 
   return esiGet(options)
