@@ -48,8 +48,9 @@ module.exports = {
   GetMeme: (meme) => {
     return Database.LookupMeme(meme)
       .then(returned => {
+        console.log(returned);
         if(!returned)
-          return Default();
+          return `http://i0.kym-cdn.com/photos/images/original/000/993/875/084.png`;
         else
           return returned;
       });
