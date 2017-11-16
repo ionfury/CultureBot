@@ -26,7 +26,7 @@ module.exports = {
 
   RemoveMeme: (meme) => {
     return new Promise.using(getMongoConnection(connectionUrl), conn => {
-      var query = {meme: meme};      
+      var query = { meme: meme };
       return conn.collection('memes').deleteOne(query);
     });
   },

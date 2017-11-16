@@ -72,7 +72,6 @@ module.exports = {
   },
 
   Price: (system, item) => {
-    return ESI.GetItemPrice(system, item)
-      .then(message => `\`\`\`${message}\`\`\``);
+    return ESI.GetItemPrice(system, item);
   }
 }

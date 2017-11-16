@@ -42,6 +42,9 @@ module.exports =
           response = checkSecurity(msg) ? CommandLibrary.AddMeme(meme, content) : SECURITY_ERROR_MESSAGE;
           break;
         case 'remove':
+          if(args.length < 1)
+            throw new Error('Gimme the meme, man.');
+          var meme = args[0];
           response = checkSecurity(msg) ? CommandLibrary.RemoveMeme(meme) : SECURITY_ERROR_MESSAGE;
           break;
         case 'price':
