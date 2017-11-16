@@ -186,10 +186,10 @@ function getCitadelMarketInfo(system, item) {
     let sellOrders = itemOrders
       .filter(order => order.is_buy_order === false);
 
-    let maxBuy = buyOrders.map(order => order.price).reduce((prev, curr) => prev > curr ? prev : curr);
-    let buyVolume = buyOrders.map(order => order.volume_remain).reduce((prev, curr) => prev + curr);
-    let minSell = sellOrders.map(order => order.price).reduce((prev, curr) => prev < curr ? prev : curr);
-    let sellVolume = sellOrders.map(order => order.volume_remain).reduce((prev, curr) => prev + curr);
+    let maxBuy = buyOrders.map(order => order.price).reduce((prev, curr) => prev > curr ? prev : curr, 0);
+    let buyVolume = buyOrders.map(order => order.volume_remain).reduce((prev, curr) => prev + curr, 0);
+    let minSell = sellOrders.map(order => order.price).reduce((prev, curr) => prev < curr ? prev : curr, 0);
+    let sellVolume = sellOrders.map(order => order.volume_remain).reduce((prev, curr) => prev + curr, 0);
 
     return formatInfo(
       systemName,
