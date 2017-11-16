@@ -28,7 +28,7 @@ Client.on('message', msg => {
   console.log(`\nCommand received: ${command}, with arguments: ${args.join(', ')}, from user ${msg.author}.`);
   
   DiscordInterface
-    .EvaluateCommand(args, msg)
+    .EvaluateCommand(command, args, msg)
     .then(res => msg.channel.send(res))
     .catch(err => {
       msg.channel.send(err.message);
