@@ -39,10 +39,10 @@ module.exports =
             throw new Error('Gimme the meme, man.');
           var meme = args[0];
           var content = msg.content.slice(Config.prefix.length).slice('add '.length).slice(meme.length+1);
-          response = checkSecurity(msg) ? CommandLibrary.Add(meme, content) : SECURITY_ERROR_MESSAGE;
+          response = checkSecurity(msg) ? CommandLibrary.AddMeme(meme, content) : SECURITY_ERROR_MESSAGE;
           break;
         case 'remove':
-          response = checkSecurity(msg) ? CommandLibrary.Remove() : SECURITY_ERROR_MESSAGE;
+          response = checkSecurity(msg) ? CommandLibrary.RemoveMeme(meme) : SECURITY_ERROR_MESSAGE;
           break;
         case 'price':
           if(args.length < 2)
