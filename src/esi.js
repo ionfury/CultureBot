@@ -171,8 +171,9 @@ function getCitadelMarketInfo(system, item) {
     return esiGet(options).then(JSON.parse);
   });
 
-  let getStructureMarkets = Promise.join(getRefreshToken, getSystemStructures, (token, structures) => {
-   
+  let getStructureMarkets = Promise.join(getRefreshToken, getSystemStructures, getSystemName, (token, structures, systemName) => {
+    if(structures.structure.length == 0)
+      throw new Error(`No structures found in **${systemName}**`);
     return Promise.map(structures.structure, structure => getStructureMarket(token, structure))
 
   });

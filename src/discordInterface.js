@@ -50,7 +50,8 @@ module.exports =
         case 'price':
           if(args.length < 2)
             throw new Error('Gimme a system and an item, man.');
-          response = CommandLibrary.Price(args[0], args[1]);
+          var item = msg.content.slice(Config.prefix.length).slice('price '.length).slice(args[0].length+1);
+          response = CommandLibrary.Price(args[0], item);
           break;
         default:
           response = CommandLibrary.GetMeme(command);
