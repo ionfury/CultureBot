@@ -221,11 +221,31 @@ function getCitadelMarketInfo(system, item) {
   });
 }
 
+function pretty(number) {
+  let length = Math.round(number).toString().length;
+  let pretty = ``;
+
+  if(length <= 3)
+    pretty = number.toString();
+  else if(4 <= length && length <= 6)
+    pretty = `${Math.round(number/1000 * 10) / 10}k`; //thousands
+  else if(7 <= length && length <= 9)
+    pretty = `${Math.round(number/1000000 * 10) / 10}m`; //millions
+  else if(10 <= length && length <= 12)
+    pretty = `${Math.round(number/1000000000 * 10) / 10}b`; //billions
+  else if(11 <= length && length <= 15)
+    pretty = `${Math.round(number/1000000000000 * 10) / 10}t`; //trillions
+  else
+    pretty = `lol`;
+
+  return pretty;
+}
+
 function formatInfo(system, type, id, volume, packaged_volume, buy, buyVol, sell, sellVol) {
   return `\nSystem: **${system}**
-  \n\tItem: **${type}** (id:${id}, vol:${volume.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} m3, packaged:${packaged_volume.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} m3)
-  \n\tBuy: $${buy.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}, vol ${buyVol.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} units
-  \n\tSell: $${sell.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}, vol ${sellVol.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} units`;
+  \n\tItem: **${type}** (id:${id}, vol:${pretty(volume)} m3, packaged:${pretty(packaged_volume)} m3)
+  \n\tBuy: $${pretty(buy)}, vol ${pretty(buyVol)} units
+  \n\tSell: $${pretty(sell)}, vol ${pretty(sellVol)} units`;
 }
 
 function getFuzzworkMarketDataPromise(stationID, typeID) {
