@@ -18,8 +18,8 @@ module.exports = {
     let d = new Date();
     let utc = d.getTime() + (d.getTimezoneOffset() * 60000);
   
-    let pst = new Date(utc - (3600000 * 6)).toTimeString().split(' ')[0];
-    let est = new Date(utc - (3600000 * 3)).toTimeString().split(' ')[0];
+    let pst = new Date(utc - (3600000 * 8)).toTimeString().split(' ')[0];
+    let est = new Date(utc - (3600000 * 5)).toTimeString().split(' ')[0];
     let cet = new Date(utc + (3600000 * 1)).toTimeString().split(' ')[0];
     let msk = new Date(utc + (3600000 * 3)).toTimeString().split(' ')[0];
     let aest = new Date(utc + (3600000 * 11)).toTimeString().split(' ')[0];
