@@ -111,7 +111,7 @@ function getItemIDPromise(item) {
     .then(JSON.parse)
     .then(res => {
       if(!res.inventorytype) 
-        throw new Error('Inventorytype not found!');
+        throw new Error(`Inventorytype not found for '${item}'!`);
       else
         return res.inventorytype.shift();
     });
