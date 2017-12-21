@@ -78,10 +78,10 @@ function getSystemIDPromise(system) {
   return esiGet(options)
   .then(JSON.parse)
   .then(res => {
-    if(!res.solarsystem) 
+    if(!res.solar_system) 
       throw new Error('Solarsystem not found!');
     else
-      return res.solarsystem.shift();
+      return res.solar_system.shift();
   });
 }
 
@@ -94,10 +94,10 @@ function getItemIDStrictPromise(item) {
   return esiGet(options)
     .then(JSON.parse)
     .then(res => {
-      if(!res.inventorytype) 
+      if(!res.inventory_type) 
         return getItemIDPromise(item);
       else
-        return res.inventorytype.shift();
+        return res.inventory_type.shift();
     });
 }
 
@@ -110,10 +110,10 @@ function getItemIDPromise(item) {
   return esiGet(options)
     .then(JSON.parse)
     .then(res => {
-      if(!res.inventorytype) 
+      if(!res.inventory_type) 
         throw new Error(`Inventorytype not found for '${item}'!`);
       else
-        return res.inventorytype.shift();
+        return res.inventory_type.shift();
     });
 }
 
