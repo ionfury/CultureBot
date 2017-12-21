@@ -72,7 +72,7 @@ function verifyToken(token) {
 function getSystemIDPromise(system) {
   let options = {
     route: 'search',
-    parameters:`categories=solarsystem&search=${system}`
+    parameters:`categories=solar_system&search=${system}`
   };
 
   return esiGet(options)
