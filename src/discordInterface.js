@@ -53,6 +53,8 @@ module.exports =
           var item = msg.content.slice(Config.prefix.length).slice('price '.length).slice(args[0].length+1);
           response = CommandLibrary.Price(args[0], item);
           break;
+        case 'simulate':
+          break;
         default:
           response = CommandLibrary.GetMeme(command);
           break;
