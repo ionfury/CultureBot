@@ -9,10 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.5.0",
-    "discord.js": "^11.2.1",
-    "mongodb": "^2.2.31",
-    "request": "^2.83.0",
-    "request-promise": "^4.2.2"
+    "bluebird": "^3.7.2",
+    "discord.js": "^11.6.4",
+    "mongodb": "^2.2.36",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
   }
 }
